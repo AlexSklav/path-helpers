@@ -8,3 +8,12 @@ build
 dist
 .tox
 docs/_build
+path_helpers.egg-info/dependency_links.txt
+path_helpers.egg-info/PKG-INFO
+path_helpers.egg-info/PKG-INFO
+path_helpers.egg-info/SOURCES.txt
+path_helpers.egg-info/top_level.txt
+path_helpers.egg-info/dependency_links.txt
+path_helpers.egg-info/PKG-INFO
+path_helpers.egg-info/SOURCES.txt
+path_helpers.egg-info/top_level.txt
