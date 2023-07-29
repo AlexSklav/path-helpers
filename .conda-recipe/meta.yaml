@@ -1,0 +1,35 @@
+{% if GIT_DESCRIBE_NUMBER > '0' %}
+{% set GIT_VERSION = GIT_DESCRIBE_TAG[1:] + '.post' + GIT_DESCRIBE_NUMBER %}
+{% else %}
+{% set GIT_VERSION = GIT_DESCRIBE_TAG[1:] %}
+{% endif %}
+package:
+  name: path-helpers
+  version: {{ GIT_VERSION }}
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+  noarch: python
+
+requirements:
+  build:
+    - python {{ python }}
+    #: .. versionchanged:: 0.6
+    - ntfsutils >=0.1.3.post2 # [win]
+
+  run:
+    - python {{ python }}
+    #: .. versionchanged:: 0.6
+    - ntfsutils >=0.1.3.post2 # [win]
+
+test:
+  imports:
+    - path_helpers
+
+# source will be downloaded prior to filling in jinja templates
+# Example assumes that this folder has setup.py in it
+source:
+  git_url: ../

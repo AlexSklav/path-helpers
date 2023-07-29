@@ -1,1 +1,3 @@
-include *.rst
+include README.md
+include versioneer.py
+include path_helpers/_version.py
