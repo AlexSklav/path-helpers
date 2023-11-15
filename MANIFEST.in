@@ -1,3 +1,5 @@
 include README.md
 include versioneer.py
 include path_helpers/_version.py
+exclude .DS_Store
+recursive-exclude path_helpers .DS_Store
