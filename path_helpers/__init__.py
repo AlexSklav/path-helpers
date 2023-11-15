@@ -51,7 +51,7 @@ import subprocess
 import sys
 import warnings
 from pathlib import Path
-from typing import Iterable, Union, List, Optional, Any, Hashable, Tuple, Set
+from typing import Iterable, Union, List, Optional, Any, Hashable, Tuple, Set, Generator
 
 from ._version import get_versions
 
@@ -109,10 +109,10 @@ class path(Path):
     #     return f'path({super().__repr__()})'
 
     # Adding a path and a string yields a path.
-    def __add__(self, more: str) -> 'Path':
+    def __add__(self, more: str) -> Path:
         return self / more
 
-    def __radd__(self, other: str) -> 'Path':
+    def __radd__(self, other: str) -> Path:
         if isinstance(other, str):
             return self.__add__(other)
         else:
@@ -304,7 +304,7 @@ class path(Path):
         """
         return fnmatch.fnmatch(self.name, pattern)
 
-    def walk(self, pattern: Optional[str] = None, errors: str = 'strict') -> Iterable[Path]:
+    def walk(self, pattern: Optional[str] = None, errors: str = 'strict') -> Generator:
         """Iterate over files and subdirs, recursively.
 
         The iterator yields path objects naming each child item of
@@ -352,7 +352,7 @@ class path(Path):
                     yield item
 
     def walkdirs(self, pattern: Optional[str] = None, errors: str = 'strict',
-                 ignore: Union[str, Iterable[str]] = None) -> Iterable[Path]:
+                 ignore: Union[str, Iterable[str]] = None) -> Generator:
         """Iterate over subdirs, recursively.
 
         With the optional 'pattern' argument, this yields only
@@ -403,7 +403,7 @@ class path(Path):
                 yield subsubdir
 
     def walkfiles(self, pattern: Optional[str] = None, errors: str = 'strict',
-                  ignore: Union[str, Iterable[str]] = None):
+                  ignore: Union[str, Iterable[str]] = None) -> Generator:
         """Iterate over files in the path, recursively.
 
         The optional argument 'pattern' limits the results to files
