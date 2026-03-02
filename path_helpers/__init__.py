@@ -96,13 +96,16 @@ class TreeWalkWarning(Warning):
     pass
 
 
-class path(Path):
+class path(type(Path())):
     """ Represents a filesystem path.
 
     For documentation on individual methods, consult their
     counterparts in os.path.
     """
-    _flavour = type(Path())._flavour
+
+    def __new__(cls, *pathsegments):
+        return super().__new__(cls, *pathsegments)
+    # _flavour = type(Path())._flavour
 
     # --- Special Python methods.
     # def __repr__(self) -> str:

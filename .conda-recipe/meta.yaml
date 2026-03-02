@@ -18,6 +18,7 @@ requirements:
   build:
     - python >=3.6
     - ntfsutils >=0.1.3.post2 # [win]
+    - setuptools
 
   run:
     - python >=3.6
